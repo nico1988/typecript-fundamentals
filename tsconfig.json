@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "noEmit": true,
     "strictNullChecks": true,
     "strict": true,
@@ -8,5 +9,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
+  "files": [],
   "include": ["examples/*/src", "challenges/*/src", "notes"]
 }

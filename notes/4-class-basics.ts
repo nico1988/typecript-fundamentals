@@ -37,16 +37,31 @@ import { HasPhoneNumber, HasEmail } from "./1-basics";
 
 /**
  * (4) Class fields can have initializers (defaults)
+ * lazy initialization
  */
-// class OtherContact implements HasEmail, HasPhoneNumber {
-//   protected age: number = 0;
-//   // private password: string;
-//   constructor(public name: string, public email: string, public phone: number) {
-//     // () password must either be initialized like this, or have a default value
-//     // this.password = Math.round(Math.random() * 1e14).toString(32);
-//   }
-// }
+class OtherContact implements HasEmail, HasPhoneNumber {
+  protected age: number = 0;
+  private passwordVal: string | undefined;
+  constructor(public name: string, public email: string, public phone: number) {
+    // () password must either be initialized like this, or have a default value
+    // this.password = Math.round(Math.random() * 1e14).toString(32);
+    this.age = 34;
+  }
+  // @ts-ignore
+  get password(): string {
+    // TS1056: Accessors are only available when targeting ECMAScript 5 and higher.
+    if(!this.passwordVal) {
+      this.passwordVal = Math.round(Math.random() * 1e14).toString(32);
+    }
+    return this.passwordVal;
+  }
+  async init() {
+    this.password;
+  }
+}
 
+let oo = new OtherContact('nico', '410827024@qq.com', 13333333333);
+console.log('oo.password:::', oo.password);
 /**
  * (5) TypeScript even allows for abstract classes, which have a partial implementation
  */

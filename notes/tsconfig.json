@@ -1,5 +1,7 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
+    "target": "es5",
     "moduleResolution": "node",
     "strictNullChecks": true,
     "noUnusedLocals": false,
@@ -7,5 +9,6 @@
     "strictBindCallApply": true,
     "strictPropertyInitialization": true
   },
+  "files": [],
   "include": ["**/*.ts"]
 }
