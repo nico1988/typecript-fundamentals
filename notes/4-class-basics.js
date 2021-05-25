@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -82,6 +95,7 @@ var OtherContact = /** @class */ (function () {
     Object.defineProperty(OtherContact.prototype, "password", {
         // @ts-ignore
         get: function () {
+            // TS1056: Accessors are only available when targeting ECMAScript 5 and higher.
             if (!this.passwordVal) {
                 this.passwordVal = Math.round(Math.random() * 1e14).toString(32);
             }
@@ -105,27 +119,30 @@ console.log('oo.password:::', oo.password);
 /**
  * (5) TypeScript even allows for abstract classes, which have a partial implementation
  */
-// abstract class AbstractContact implements HasEmail, HasPhoneNumber {
-//   public abstract phone: number; // must be implemented by non-abstract subclasses
-//   constructor(
-//     public name: string,
-//     public email: string // must be public to satisfy HasEmail
-//   ) {}
-//   abstract sendEmail(): void; // must be implemented by non-abstract subclasses
-// }
+var AbstractContact = /** @class */ (function () {
+    function AbstractContact(name, email // must be public to satisfy HasEmail
+    ) {
+        this.name = name;
+        this.email = email;
+    }
+    return AbstractContact;
+}());
 /**
  * (6) implementors must "fill in" any abstract methods or properties
  */
-// class ConcreteContact extends AbstractContact {
-//   constructor(
-//     public phone: number, // must happen before non property-parameter arguments
-//     name: string,
-//     email: string
-//   ) {
-//     super(name, email);
-//   }
-//   sendEmail() {
-//     // mandatory!
-//     console.log("sending an email");
-//   }
-// }
+var ConcreteContact = /** @class */ (function (_super) {
+    __extends(ConcreteContact, _super);
+    function ConcreteContact(phone, // must happen before non property-parameter arguments
+    name, email) {
+        var _this = _super.call(this, name, email) || this;
+        _this.phone = phone;
+        return _this;
+    }
+    ConcreteContact.prototype.sendEmail = function () {
+        // mandatory!
+        console.log("sending an email");
+    };
+    return ConcreteContact;
+}(AbstractContact));
+var ab = new ConcreteContact(133, 'nico', '410827024@qq.com');
+ab.sendEmail();
