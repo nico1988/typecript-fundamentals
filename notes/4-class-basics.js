@@ -73,11 +73,15 @@ exports.__esModule = true;
  * - protected - me and subclasses
  * - private - only me
  */
-// class ParamPropContact implements HasEmail {
-//   constructor(public name: string, public email: string = "no email") {
-//     // nothing needed
-//   }
-// }
+var ParamPropContact = /** @class */ (function () {
+    function ParamPropContact(name, email) {
+        if (email === void 0) { email = "no email"; }
+        this.name = name;
+        this.email = email;
+        // nothing needed
+    }
+    return ParamPropContact;
+}());
 /**
  * (4) Class fields can have initializers (defaults)
  * lazy initialization

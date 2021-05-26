@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "strictNullChecks": true,
     "noUnusedLocals": false,
+    "noImplicitAny": true,
     "noUnusedParameters": false,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true
